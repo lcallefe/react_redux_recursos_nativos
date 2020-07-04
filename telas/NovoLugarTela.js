@@ -2,9 +2,21 @@ import React from 'react';
 import { View, Text, Stylesheet, ScrollView, TextInput, Button } from 'react-native';
 import { ScrollView, TextInput } from 'react-native-gesture-handler';
 import cores from '../constantes/Cores';
+import { useDispatch } from 'react-redux';
+
+import * as lugaresActions from '../store/lugares-action';
+
+
+
 
 const NovoLugarTela = (props) => {
     const [novoLugar, setNovoLugar] = useState('');
+    const dispatch = useDispatch();
+
+    const adicionarLugar = () => {
+        dispatch(lugaresActions.addLugar(novoLugar));
+        props.navigation.goBack();
+    }
     return (
         <ScrollView >
             <View style={estilos.form}>

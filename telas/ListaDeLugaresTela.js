@@ -1,18 +1,36 @@
 import React from 'react';
-import { View, Text, Stylesheet , Platform } from 'react-native';
+import { View, Text, Stylesheet , Platform, FlatList } from 'react-native';
 import {HeaderButtons, Item } from 'react-navigation-header-buttons';
+
 import BotaoCabecalho from '../componentes/BotaoCabecalho';
+import LugarItem from '../componentes/LugarItem';
 
 
 const ListaDeLugaresTela = (props) => {
+    const lugares = useSelector (estado => estado.lugares.lugares);
     return (
-        <View>
-            <text>ListaDeLugaresTela</text>
-        </View>
+        <FlatList
+            data={lugares}
+            keyExtractor={lugar => lugar.id}
+            renderItem={lugar =>
+            <LugarItem
+                nomeLugar={lugar.item.titulo}
+                onSelect={() =>
+                    props.navigation.navigate('DetalheDoLugar', { tituloLugar: lugar.item.titulo, idLugar: lugar.id })}                    
+                    imagem={null}                    
+                    endereco={null}
+                />
+                
+                
+                }    
+                
+    />
     );
-}
+            }
 
-ListaDeLugaresTEla.navigationOptions = dadosNav => {
+
+
+ListaDeLugaresTela.navigationOptions = dadosNav => {
     return {
         headerTitle : 'Lista de Lugares',
         headerRight:
